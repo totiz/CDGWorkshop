@@ -76,7 +76,7 @@ contract SimpleBank { // CamelCase
     event DepositMade(address accountAddress, uint amount);
 
     // Constructor, can receive one or many variables here; only one allowed
-    function AcmeBank() {
+    constructor() public {
         // msg provides details about the message that's sent to the contract
         // msg.sender is contract caller (address of contract creator)
         owner = msg.sender;
