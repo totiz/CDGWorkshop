@@ -49,7 +49,7 @@ library SafeMath {
 
 
 /// @title SimpleBank
-/// @author nemild
+/// @author nemild, kor, tot
 
 /* 'contract' has similarities to 'class' in other languages (class variables,
 inheritance, etc.) */
