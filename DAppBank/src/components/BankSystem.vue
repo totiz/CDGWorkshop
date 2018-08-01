@@ -15,8 +15,6 @@
     <h2>
       Deposit
     </h2>
-    <label for="Account name">Account name</label>
-    <input type="text" v-model="depositAccountName" placeholder="Account name"><br>
 
     <label for="Amount">Amount</label>
     <input type="number" v-model="depositAmount" placeholder="Amount"><br>
@@ -92,10 +90,13 @@
 </template>
 
 <script>
+import BankSystem from './DApp.js'
+
 export default {
   name: 'BankSystem',
   data () {
     return {
+      bankSystem: null,
       // Intial System Accounts
       accounts: [
         {
@@ -136,6 +137,9 @@ export default {
       interestRate: 10
     }
   },
+  mounted () {
+    this.bankSystem = new BankSystem()
+  },
   methods: {
     // Create Account
     createAccount () {
@@ -152,16 +156,9 @@ export default {
     },
 
     // Deposit
-    deposit () {
-      let accountIndex = this.getAccountIndexByName(this.depositAccountName)
-      if (accountIndex === -1) {
-        alert('Account not found')
-        return
-      }
-
-      // Validate Input here
-
-      this.accounts[accountIndex].balance += parseInt(this.depositAmount)
+    async deposit () {
+      let balance = await this.bankSystem.deposit(this.depositAmount)
+      console.log(`balance ${balance}`)
     },
 
     // Withdraw
