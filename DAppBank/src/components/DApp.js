@@ -17,9 +17,11 @@ class BankSystem {
 
   async deposit (amount) {
     let accounts = await this.web3.eth.getAccounts()
+    let etherAmt = this.web3.utils.toWei(amount.toString())
+
     let options = {
       from: accounts[0],
-      value: amount
+      value: etherAmt
     }
 
     let balance = await this.bank.methods.deposit().send(options)
