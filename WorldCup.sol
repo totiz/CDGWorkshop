@@ -2,23 +2,34 @@ pragma solidity ^0.4.24;
 
 contract Worldcup {
     string[] public teams;
-    int256 public winner = -1;
+    int256 public winnerIndex = -1;
     
     constructor() public {
         
     }
     
+    // Add Football Team
     function addNewTeam(string _name) public {
+        require(keccak256(_name) != keccak256(""));
         teams.push(_name);
     }
     
-    function randomWinner(uint256 nonce) public returns (int256) {
+    // Random the winner
+    function randomWinner(string _seed) public returns (int256) {
         // random algorithm
-        winner =  int256((nonce * 27999939614659217371136582730618069762179071 ^ 22) % teams.length);
-        return winner;
+        winnerIndex = int256( uint256(keccak256("Random Prefix", _seed, "Random Srefix")) % teams.length );
+        return winnerIndex;
     }
     
+    // Team count
     function teamCount() public view returns (uint256) {
+        require(winnerIndex >= 0);
         return teams.length;
+    }
+    
+    // Winner name
+    function winnerName() public view returns (string) {
+        require(winnerIndex >= 0);
+        return teams[uint256(winnerIndex)];
     }
 }
