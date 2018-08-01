@@ -5,7 +5,9 @@
     <h2>
       Create Account
     </h2>
+    <label for="Account name">Account name</label>
     <input type="text" v-model="createAccountName" placeholder="Account name"><br>
+
     <button @click="createAccount">Create</button>
 
     <!-- DEPOSIT -->
@@ -13,8 +15,12 @@
     <h2>
       Deposit
     </h2>
+    <label for="Account name">Account name</label>
     <input type="text" v-model="depositAccountName" placeholder="Account name"><br>
+
+    <label for="Amount">Amount</label>
     <input type="number" v-model="depositAmount" placeholder="Amount"><br>
+
     <button @click="deposit">Deposit</button>
 
     <!-- WITHDRAW -->
@@ -22,8 +28,12 @@
     <h2>
       Withdraw
     </h2>
+    <label for="Account name">Account name</label>
     <input type="text" v-model="withdrawAccountName" placeholder="Account name"><br>
+
+    <label for="Amount">Amount</label>
     <input type="number" v-model="withdrawAmount" placeholder="Amount"><br>
+
     <button @click="withdraw">Withdraw</button>
 
     <!-- CHECK BALANCE -->
@@ -31,8 +41,13 @@
     <h2>
       Check Balance
     </h2>
+    <label for="Account name">Account name</label>
     <input type="text" v-model="checkBalanceAccountName" placeholder="Account name"><br>
+
     <button @click="check">Check</button>
+
+    <br />
+    <br />
     <div>
       <label for="Balance">Balance</label>
       {{ AccountBalance }}
@@ -43,8 +58,12 @@
     <h2>
       Account Inquiry
     </h2>
+    <label for="Account name">Account name</label>
     <input type="text" v-model="accountInquiryAccountName" placeholder="Account name"><br>
+
     <button @click="inquiry">Inquiry</button>
+    <br />
+    <br />
     <div>
       <label for="Account Number">Account Number</label>
       {{ inquiryAccountNumber }}
@@ -63,7 +82,10 @@
     <h2>
       Increase Year
     </h2>
+    <label for="Account name">Year</label>
     <input type="text" v-model="yearToIncrease" placeholder="Year"><br>
+
+    <label for="Rate">Rate</label>
     <input type="text" v-model="interestRate" placeholder="Rate"><br>
     <button @click="increaseYear">Increase</button>
   </div>
