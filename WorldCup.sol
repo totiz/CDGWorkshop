@@ -10,7 +10,9 @@ contract Worldcup {
     
     // Add Football Team
     function addNewTeam(string _name) public {
+        // Validate
         require(keccak256(_name) != keccak256(""));
+        
         teams.push(_name);
     }
     
@@ -23,13 +25,14 @@ contract Worldcup {
     
     // Team count
     function teamCount() public view returns (uint256) {
-        require(winnerIndex >= 0);
         return teams.length;
     }
     
     // Winner name
     function winnerName() public view returns (string) {
+        // Validate
         require(winnerIndex >= 0);
+        
         return teams[uint256(winnerIndex)];
     }
 }
