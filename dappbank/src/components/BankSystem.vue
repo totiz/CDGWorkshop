@@ -25,6 +25,18 @@
     <input type="text" v-model="withdrawAccountName" placeholder="Account name"><br>
     <input type="number" v-model="withdrawAmount" placeholder="Amount"><br>
     <button @click="withdraw">Withdraw</button>
+
+    <!-- CHECK BALANCE -->
+    <hr />
+    <h2>
+      Check Balance
+    </h2>
+    <input type="text" v-model="checkBalanceAccountName" placeholder="Account name"><br>
+    <button @click="check">Check</button>
+    <div>
+      <label for="Balance">Balance</label>
+      {{ AccountBalance }}
+    </div>
   </div>
 </template>
 
@@ -56,7 +68,11 @@ export default {
 
       // Withdraw
       withdrawAccountName: 'Nattapon',
-      withdrawAmount: 0
+      withdrawAmount: 0,
+
+      // Check Balance
+      checkBalanceAccountName: 'Nattapon',
+      AccountBalance: 0
     }
   },
   methods: {
@@ -98,6 +114,18 @@ export default {
       // Validate Input here
 
       this.accounts[accountIndex].balance -= parseInt(this.withdrawAmount)
+    },
+
+    // Check Balance
+    check () {
+      let accountIndex = this.getAccountIndexByName(this.checkBalanceAccountName)
+      if (accountIndex === -1) {
+        alert('Account not found')
+        return
+      }
+
+      // Validate Input here
+      this.AccountBalance = this.accounts[accountIndex].balance
     },
 
     // Utility
