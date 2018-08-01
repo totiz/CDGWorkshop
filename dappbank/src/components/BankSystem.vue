@@ -37,6 +37,26 @@
       <label for="Balance">Balance</label>
       {{ AccountBalance }}
     </div>
+
+    <!-- ACCOUNT DETAIL -->
+    <hr />
+    <h2>
+      Account Inquiry
+    </h2>
+    <input type="text" v-model="accountInquiryAccountName" placeholder="Account name"><br>
+    <button @click="inquiry">Inquiry</button>
+    <div>
+      <label for="Account Number">Account Number</label>
+      {{ inquiryAccountNumber }}
+    </div>
+    <div>
+      <label for="Name">Name</label>
+      {{ inquiryAccountName }}
+    </div>
+    <div>
+      <label for="Balance">Balance</label>
+      {{ inquiryAccountBalance }}
+    </div>
   </div>
 </template>
 
@@ -72,7 +92,13 @@ export default {
 
       // Check Balance
       checkBalanceAccountName: 'Nattapon',
-      AccountBalance: 0
+      AccountBalance: 0,
+
+      // Account Detail
+      accountInquiryAccountName: 'Nattapon',
+      inquiryAccountNumber: '',
+      inquiryAccountName: '',
+      inquiryAccountBalance: 0
     }
   },
   methods: {
@@ -126,6 +152,20 @@ export default {
 
       // Validate Input here
       this.AccountBalance = this.accounts[accountIndex].balance
+    },
+
+    // Account Detail
+    inquiry () {
+      let accountIndex = this.getAccountIndexByName(this.accountInquiryAccountName)
+      if (accountIndex === -1) {
+        alert('Account not found')
+        return
+      }
+
+      let account = this.accounts[accountIndex]
+      this.inquiryAccountNumber = account.number
+      this.inquiryAccountName = account.name
+      this.inquiryAccountBalance = account.balance
     },
 
     // Utility
