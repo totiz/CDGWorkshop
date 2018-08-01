@@ -1,11 +1,30 @@
 <template>
   <div class="hello">
+    <!-- CREATE ACCOUNT -->
     <hr />
     <h2>
       Create Account
     </h2>
-    <input type="text" v-model="userInputAccountName" placeholder="Account name"><br>
+    <input type="text" v-model="createAccountName" placeholder="Account name"><br>
     <button @click="createAccount">Create</button>
+
+    <!-- DEPOSIT -->
+    <hr />
+    <h2>
+      Deposit
+    </h2>
+    <input type="text" v-model="depositAccountName" placeholder="Account name"><br>
+    <input type="number" v-model="depositAmount" placeholder="Amount"><br>
+    <button @click="deposit">Deposit</button>
+
+    <!-- WITHDRAW -->
+    <hr />
+    <h2>
+      Withdraw
+    </h2>
+    <input type="text" v-model="withdrawAccountName" placeholder="Account name"><br>
+    <input type="number" v-model="withdrawAmount" placeholder="Amount"><br>
+    <button @click="withdraw">Withdraw</button>
   </div>
 </template>
 
@@ -15,33 +34,79 @@ export default {
   data () {
     return {
       // Intial System Accounts
-      accounts: {
-        '84983390593904': {
+      accounts: [
+        {
+          number: '84983390593904',
           name: 'Nattapon',
           balance: 0
+        },
+        {
+          number: '5489932903290',
+          name: 'Nimakul',
+          balance: 0
         }
-      },
+      ],
 
       // Create Account
-      userInputAccountName: ''
+      createAccountName: 'CDGGABLE',
+
+      // Deposit
+      depositAccountName: 'Nattapon',
+      depositAmount: 0,
+
+      // Withdraw
+      withdrawAccountName: 'Nattapon',
+      withdrawAmount: 0
     }
   },
   methods: {
+    // Create Account
     createAccount () {
       console.log(this.createAccountName)
-      console.log()
 
-      let accountName = this.userInputAccountName
+      let accountName = this.createAccountName
       let accountNumber = this.randomAccountNumber()
 
-      this.accounts[accountNumber] = {
+      this.accounts.push({
+        number: accountNumber,
         name: accountName,
         balance: 0
-      }
+      })
     },
 
+    // Deposit
+    deposit () {
+      let accountIndex = this.getAccountIndexByName(this.depositAccountName)
+      if (accountIndex === -1) {
+        alert('Account not found')
+        return
+      }
+
+      // Validate Input here
+
+      this.accounts[accountIndex].balance += parseInt(this.depositAmount)
+    },
+
+    // Withdraw
+    withdraw () {
+      let accountIndex = this.getAccountIndexByName(this.withdrawAccountName)
+      if (accountIndex === -1) {
+        alert('Account not found')
+        return
+      }
+
+      // Validate Input here
+
+      this.accounts[accountIndex].balance -= parseInt(this.withdrawAmount)
+    },
+
+    // Utility
     randomAccountNumber () {
       return parseInt(Math.random() * 9999999999).toString()
+    },
+
+    getAccountIndexByName (accountName) {
+      return this.accounts.map(account => account.name).indexOf(accountName)
     }
   }
 }
