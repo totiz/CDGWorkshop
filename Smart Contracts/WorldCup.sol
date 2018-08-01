@@ -11,7 +11,7 @@ contract Worldcup {
     // Add Football Team
     function addNewTeam(string _name) public {
         // Validate
-        require(keccak256(_name) != keccak256(""));
+        require(keccak256(abi.encodePacked(_name)) != keccak256(abi.encodePacked("")));
         
         teams.push(_name);
     }
@@ -19,7 +19,7 @@ contract Worldcup {
     // Random the winner
     function randomWinner(string _seed) public returns (int256) {
         // random algorithm
-        winnerIndex = int256( uint256(keccak256("Random Prefix", _seed, "Random Srefix")) % teams.length );
+        winnerIndex = int256(uint256(keccak256(abi.encodePacked("Random Prefix", _seed, "Random Srefix"))) % teams.length);
         return winnerIndex;
     }
     
