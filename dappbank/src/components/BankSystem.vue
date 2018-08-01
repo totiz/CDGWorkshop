@@ -57,6 +57,15 @@
       <label for="Balance">Balance</label>
       {{ inquiryAccountBalance }}
     </div>
+
+    <!-- INCREASE YEAR -->
+    <hr />
+    <h2>
+      Increase Year
+    </h2>
+    <input type="text" v-model="yearToIncrease" placeholder="Year"><br>
+    <input type="text" v-model="interestRate" placeholder="Rate"><br>
+    <button @click="increaseYear">Increase</button>
   </div>
 </template>
 
@@ -98,7 +107,11 @@ export default {
       accountInquiryAccountName: 'Nattapon',
       inquiryAccountNumber: '',
       inquiryAccountName: '',
-      inquiryAccountBalance: 0
+      inquiryAccountBalance: 0,
+
+      // Increase Year
+      yearToIncrease: 1,
+      interestRate: 10
     }
   },
   methods: {
@@ -166,6 +179,16 @@ export default {
       this.inquiryAccountNumber = account.number
       this.inquiryAccountName = account.name
       this.inquiryAccountBalance = account.balance
+    },
+
+    // Increase Year
+    increaseYear () {
+      // This has a bug that can increase only 1 year per request
+      for (var i = 0; i < this.accounts.length; i++) {
+        let interest = this.accounts[i].balance * parseInt(this.interestRate) / 100
+        this.accounts[i].balance += interest
+      }
+      console.log(this.yearToIncrease)
     },
 
     // Utility
